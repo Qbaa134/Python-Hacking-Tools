@@ -1,0 +1,67 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+.search {
+    text-align: center;
+}
+
+.search input {
+    width: 50%;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.search button {
+    padding: 10px 20px;
+}
+
+.results {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.airline-card {
+    display: inline-block;
+    width: 300px;
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.airline-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
