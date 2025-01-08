@@ -14,14 +14,18 @@ function searchAirline() {
                 const extract = page.extract;
                 const imageUrl = page.original ? page.original.source : 'https://via.placeholder.com/300';
 
-                const airlineCard = `
-                    <div class="airline-card">
-                        <h3>${title}</h3>
-                        <img src="${imageUrl}" alt="${title}">
-                        <p>${extract}</p>
-                    </div>
-                `;
-                resultsDiv.innerHTML += airlineCard;
+                // Fetch airplane image from Unsplash
+                fetch(`https://source.unsplash.com/600x400/?${title} airplane`)
+                    .then(imgResponse => {
+                        const airlineCard = `
+                            <div class="airline-card">
+                                <img src="${imgResponse.url}" alt="${title}">
+                                <h3>${title}</h3>
+                                <p>${extract}</p>
+                            </div>
+                        `;
+                        resultsDiv.innerHTML += airlineCard;
+                    });
             }
         })
         .catch(error => {
