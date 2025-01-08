@@ -1,38 +1,30 @@
-const apiKey = '23592b9a165ab83792cffa1bec6a95a0'; // Wpisz swój klucz API tutaj
-const apiUrl = `https://aviationstack.com/api/v1/airlines?access_key=${apiKey}`;
-
-async function searchAirline() {
-    const query = document.getElementById("searchInput").value.toLowerCase();
+function searchAirline() {
+    const query = document.getElementById("searchInput").value;
     const resultsDiv = document.getElementById("results");
-    resultsDiv.innerHTML = "Loading...";
+    resultsDiv.innerHTML = "";
 
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
+    // Fetch data from Wikipedia API
+    fetch(`https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=extracts|pageimages&titles=${query}&exintro=1&piprop=original`)
+        .then(response => response.json())
+        .then(data => {
+            const pages = data.query.pages;
+            for (const pageId in pages) {
+                const page = pages[pageId];
+                const title = page.title;
+                const extract = page.extract;
+                const imageUrl = page.original ? page.original.source : 'https://via.placeholder.com/300';
 
-        resultsDiv.innerHTML = "";
-
-        const filteredAirlines = data.data.filter(airline =>
-            airline.airline_name.toLowerCase().includes(query)
-        );
-
-        filteredAirlines.forEach(airline => {
-            const airlineCard = `
-                <div class="airline-card">
-                    <h3>${airline.airline_name}</h3>
-                    <p>Country: ${airline.country_name}</p>
-                    <p>Founded: ${airline.founded}</p>
-                    <p>IATA Code: ${airline.iata_code}</p>
-                </div>
-            `;
-            resultsDiv.innerHTML += airlineCard;
+                const airlineCard = `
+                    <div class="airline-card">
+                        <h3>${title}</h3>
+                        <img src="${imageUrl}" alt="${title}">
+                        <p>${extract}</p>
+                    </div>
+                `;
+                resultsDiv.innerHTML += airlineCard;
+            }
+        })
+        .catch(error => {
+            resultsDiv.innerHTML = "<p>No information found. Please try a different search.</p>";
         });
-
-        if (filteredAirlines.length === 0) {
-            resultsDiv.innerHTML = "No airlines found.";
-        }
-    } catch (error) {
-        resultsDiv.innerHTML = "Error fetching data.";
-        console.error(error);
-    }
 }
