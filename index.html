@@ -3,33 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USB Formatter</title>
+    <title>USB Disk Formatter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-    <h1>USB Formatter</h1>
+    <h1>USB Disk Formatter & GitHub Cleaner</h1>
     <form id="formatForm">
-        <label for="port">Select USB Port:</label>
+        <label for="port">Select USB Port:</label><br>
         <select id="port" name="port">
-            <option value="/dev/sda">/dev/sda</option>
-            <option value="/dev/sdb">/dev/sdb</option>
-            <option value="/dev/sdc">/dev/sdc</option>
-        </select>
-
-        <br><br>
-
-        <label for="formatType">Select Format Type:</label>
-        <select id="formatType" name="formatType">
-            <option value="fat32">FAT32</option>
-            <option value="ntfs">NTFS</option>
-            <option value="ext4">EXT4</option>
-        </select>
-
-        <br><br>
+            <option value="usb1">USB Port 1</option>
+            <option value="usb2">USB Port 2</option>
+        </select><br><br>
+        
+        <label for="format">Select Format Type:</label><br>
+        <select id="format" name="format">
+            <option value="FAT32">FAT32</option>
+            <option value="NTFS">NTFS</option>
+            <option value="EXT4">EXT4</option>
+        </select><br><br>
 
         <button type="button" onclick="formatDisk()">Format Disk</button>
     </form>
 
-    <p id="result"></p>
+    <h2>GitHub Repository Cleaner</h2>
+    <form id="githubForm">
+        <label for="repoUrl">GitHub Repository URL:</label><br>
+        <input type="text" id="repoUrl" name="repoUrl" placeholder="https://github.com/username/repository" required><br><br>
+        <button type="button" onclick="cleanGitHub()">Clean Repository</button>
+    </form>
 
     <script>
         async function formatDisk() {
+            const port = document.getElementById('port').value;
+            const formatType = document.getElementById('format').value;
+            alert(`Formatting ${port} as ${formatType}...`);
+            // Tu musisz dodać skrypty backendowe
+        }
+
+        async function cleanGitHub() {
+            const repoUrl = document.getElementById('repoUrl').value;
+            if (confirm(`Are you sure you want to delete all files in ${repoUrl}?`)) {
+                alert(`Cleaning ${repoUrl}...`);
+                // Skrypt backendowy do usuwania plików z GitHub
+            }
+        }
+    </script>
+</body>
+</html>
