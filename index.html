@@ -1,37 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USB Formatting and GitHub Cleanup</title>
+    <title>Formatowanie USB</title>
 </head>
 <body>
-    <h1>USB Formatting and GitHub Cleanup</h1>
-
-    <!-- Form to select USB port, file system and perform actions -->
-    <form action="process.php" method="POST">
-        <h2>USB Port Selection</h2>
-        <label for="usb_port">Choose USB Port:</label>
+    <h1>Formatowanie i czyszczenie USB</h1>
+    <form action="process_format.php" method="POST">
+        <label for="usb_port">Wybierz port USB:</label>
         <select name="usb_port" id="usb_port">
-            <!-- Example ports, this list could be dynamically populated -->
-            <option value="/dev/sda">/dev/sda</option>
-            <option value="/dev/sdb">/dev/sdb</option>
-            <option value="/dev/sdc">/dev/sdc</option>
+            <option value="usb1">Port 1</option>
+            <option value="usb2">Port 2</option>
+            <option value="usb3">Port 3</option>
+            <!-- Możesz dodać więcej portów, jeśli są dostępne -->
         </select>
-        
-        <h2>Choose File System Format</h2>
-        <label for="file_system">File System:</label>
-        <select name="file_system" id="file_system">
-            <option value="ext4">ext4</option>
-            <option value="ntfs">NTFS</option>
-            <option value="fat32">FAT32</option>
+        <br><br>
+
+        <label for="format_type">Typ formatowania:</label>
+        <select name="format_type" id="format_type">
+            <option value="FAT32">FAT32</option>
+            <option value="NTFS">NTFS</option>
+            <option value="exFAT">exFAT</option>
+            <!-- Dodaj inne typy formatowania, jeśli są dostępne -->
         </select>
+        <br><br>
 
-        <h2>GitHub Cleanup</h2>
-        <label for="repo_name">GitHub Repository Name:</label>
-        <input type="text" name="repo_name" id="repo_name" required><br>
+        <label for="clean_files">Czy chcesz usunąć wszystkie pliki?</label>
+        <input type="checkbox" name="clean_files" id="clean_files">
+        <br><br>
 
-        <input type="submit" name="submit" value="Format USB and Clean GitHub">
+        <input type="submit" value="Formatowanie USB">
     </form>
 </body>
 </html>
