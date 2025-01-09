@@ -4,16 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formatowanie USB</title>
+    <script>
+        // Funkcja do dynamicznego załadowania urządzeń USB
+        function loadUsbPorts() {
+            fetch('get_usb_ports.php')
+                .then(response => response.json())
+                .then(data => {
+                    const usbPortSelect = document.getElementById('usb_port');
+                    usbPortSelect.innerHTML = '';
+                    data.forEach(port => {
+                        const option = document.createElement('option');
+                        option.value = port;
+                        option.textContent = port;
+                        usbPortSelect.appendChild(option);
+                    });
+                });
+        }
+
+        window.onload = loadUsbPorts;
+    </script>
 </head>
 <body>
     <h1>Formatowanie i czyszczenie USB</h1>
     <form action="process_format.php" method="POST">
         <label for="usb_port">Wybierz port USB:</label>
         <select name="usb_port" id="usb_port">
-            <option value="usb1">Port 1</option>
-            <option value="usb2">Port 2</option>
-            <option value="usb3">Port 3</option>
-            <!-- Możesz dodać więcej portów, jeśli są dostępne -->
+            <!-- Dostępne porty USB będą załadowane dynamicznie -->
         </select>
         <br><br>
 
@@ -22,7 +38,6 @@
             <option value="FAT32">FAT32</option>
             <option value="NTFS">NTFS</option>
             <option value="exFAT">exFAT</option>
-            <!-- Dodaj inne typy formatowania, jeśli są dostępne -->
         </select>
         <br><br>
 
