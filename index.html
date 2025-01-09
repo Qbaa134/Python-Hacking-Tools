@@ -3,100 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal File Converter</title>
-    <link rel="stylesheet" href="style.css">
+    <title>USB Formatter</title>
 </head>
 <body>
-    <header>
-        <h1>🌐 Universal File Converter</h1>
-        <p>Convert files between any formats — documents, archives, images, audio, video, and more!</p>
-    </header>
+    <h1>USB Formatter</h1>
+    <form id="formatForm">
+        <label for="port">Select USB Port:</label>
+        <select id="port" name="port">
+            <option value="/dev/sda">/dev/sda</option>
+            <option value="/dev/sdb">/dev/sdb</option>
+            <option value="/dev/sdc">/dev/sdc</option>
+        </select>
 
-    <main>
-        <section class="converter">
-            <h2>Upload Your File</h2>
-            <input type="file" id="fileInput">
+        <br><br>
 
-            <h3>Select Conversion Format</h3>
-            <div class="dropdowns">
-                <div>
-                    <label for="inputFormat">From:</label>
-                    <select id="inputFormat">
-                        <!-- Archiwa -->
-                        <optgroup label="Archives">
-                            <option value="zip">ZIP</option>
-                            <option value="tar.gz">TAR.GZ</option>
-                            <option value="rar">RAR</option>
-                            <option value="7z">7Z</option>
-                            <option value="iso">ISO</option>
-                        </optgroup>
+        <label for="formatType">Select Format Type:</label>
+        <select id="formatType" name="formatType">
+            <option value="fat32">FAT32</option>
+            <option value="ntfs">NTFS</option>
+            <option value="ext4">EXT4</option>
+        </select>
 
-                        <!-- Dokumenty -->
-                        <optgroup label="Documents">
-                            <option value="txt">TXT</option>
-                            <option value="csv">CSV</option>
-                            <option value="json">JSON</option>
-                            <option value="xml">XML</option>
-                            <option value="md">Markdown</option>
-                            <option value="html">HTML</option>
-                            <option value="pdf">PDF</option>
-                            <option value="doc">DOC</option>
-                            <option value="docx">DOCX</option>
-                        </optgroup>
+        <br><br>
 
-                        <!-- Obrazy -->
-                        <optgroup label="Images">
-                            <option value="png">PNG</option>
-                            <option value="jpg">JPG</option>
-                            <option value="gif">GIF</option>
-                            <option value="svg">SVG</option>
-                            <option value="bmp">BMP</option>
-                            <option value="tiff">TIFF</option>
-                        </optgroup>
+        <button type="button" onclick="formatDisk()">Format Disk</button>
+    </form>
 
-                        <!-- Audio -->
-                        <optgroup label="Audio">
-                            <option value="mp3">MP3</option>
-                            <option value="wav">WAV</option>
-                            <option value="flac">FLAC</option>
-                        </optgroup>
+    <p id="result"></p>
 
-                        <!-- Wideo -->
-                        <optgroup label="Video">
-                            <option value="mp4">MP4</option>
-                            <option value="avi">AVI</option>
-                            <option value="mkv">MKV</option>
-                            <option value="mov">MOV</option>
-                        </optgroup>
-
-                        <!-- Skrypty -->
-                        <optgroup label="Scripts">
-                            <option value="py">Python (.py)</option>
-                            <option value="js">JavaScript (.js)</option>
-                            <option value="php">PHP</option>
-                            <option value="sh">Shell Script (.sh)</option>
-                            <option value="bat">Batch Script (.bat)</option>
-                        </optgroup>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="outputFormat">To:</label>
-                    <select id="outputFormat">
-                        <!-- Te same formaty co powyżej -->
-                    </select>
-                </div>
-            </div>
-
-            <button onclick="convertFile()">Convert</button>
-            <a id="downloadLink" style="display: none;">Download Converted File</a>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Universal File Converter | Powered by HTML, CSS & JavaScript</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-    </html>
+    <script>
+        async function formatDisk() {
