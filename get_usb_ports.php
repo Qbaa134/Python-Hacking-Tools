@@ -1,4 +1,4 @@
-?php
+<?php
 // Sprawdzamy, czy dane zostały wysłane z Androida
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['android_usb'])) {
