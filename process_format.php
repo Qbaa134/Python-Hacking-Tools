@@ -11,24 +11,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "Typ formatowania: " . htmlspecialchars($format_type) . "<br>";
     echo "Czy wyczyścić pliki: " . ($clean_files ? 'Tak' : 'Nie') . "<br>";
 
-    // Tutaj można wykonać operacje na systemie, np.:
+    // Komenda do usuwania plików
     if ($clean_files) {
-        // Przykładowe czyszczenie dysku (bardzo niebezpieczne w prawdziwym środowisku)
-        // Przykład: usuwanie plików na wybranym dysku USB
-        // Komenda bash do usunięcia plików (zależna od systemu)
-        // WARNING: Używanie poniższego kodu w prawdziwym środowisku może prowadzić do trwałej utraty danych!
-        $command = "rm -rf /mnt/" . escapeshellarg($usb_port) . "/*";
-        // Uruchomienie komendy systemowej (prawdziwa operacja czyszczenia)
-        // Możesz chcieć zaimplementować bardziej bezpieczne mechanizmy
+        $command = "rm -rf /mnt/" . escapeshellarg($usb_port) . "/*";  // Linux
         shell_exec($command);
         echo "Pliki zostały usunięte.";
     }
 
-    // Formatowanie dysku (również zależne od systemu)
-    // Przykład: formatowanie dysku (tutaj tylko przykład, nie uruchamiaj w środowisku produkcyjnym)
+    // Formatowanie dysku
     $format_command = "mkfs." . escapeshellarg($format_type) . " /dev/" . escapeshellarg($usb_port);
-    // Uruchomienie komendy formatowania
-    // WARNING: Uruchamianie poniższego kodu w prawdziwym środowisku spowoduje utratę danych!
+    // Użycie shell_exec do formatowania (Linux)
     shell_exec($format_command);
     echo "Dysk został sformatowany na typ " . htmlspecialchars($format_type) . ".";
 } else {
